@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socket.io Test</title>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <h1>Socket.io Test</h1>
+
+  <input id="messageInput" placeholder="Enter message" />
+  <button id="sendMessage">Send Message</button>
+
+  <ul id="messages"></ul>
+
+  <script>
+    const socket = io();
+
+    // Listen for connection status
+    socket.on('connection status', (data) => {
+      console.log('Connection status:', data);
+    });
+
+    // Listen for messages
+    socket.on('chat message', (data) => {
+      const messages = document.getElementById('messages');
+      const newMessage = document.createElement('li');
+      newMessage.textContent = `Teacher: ${data.teacher_id}, User: ${data.user_id}, Message: ${data.message}`;
+      messages.appendChild(newMessage);
+    });
+
+    // Send message
+    document.getElementById('sendMessage').addEventListener('click', () => {
+      const message = document.getElementById('messageInput').value;
+      socket.emit('chat_message', { teacher_id: 473, user_id: 69, message });
+    });
+  </script>
+</body>
+</html>
