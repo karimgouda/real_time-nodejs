@@ -3,17 +3,17 @@ const { createServer } = require('http');
 const { Server } = require('socket.io');
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');
-const { join } = require('path');
+const { join } = require('path
 
 const app = express();
 const server = createServer(app);
 const io = new Server(server);
 
 const db = mysql.createConnection({
-  host: '127.0.0.1',
+  host: '127.0.0.4',
   user: 'root',
   password: 'root',
-  database: 'nageed'
+  database: 'nageeedwed'
 });
 
 db.connect((err) => {
